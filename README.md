@@ -2,4 +2,4 @@
 First project for self driving car engineer nanodegree
 running code with:
 
-``nvidia-docker run -it --rm -p 8888:8888 -v `pwd`:/src udacity/carnd-term1-starter-kit test.ipynb``
+``sudo nvidia-docker run -it --rm -p 8888:8888 -v `pwd`:/src udacity/carnd-term1-starter-kit``
