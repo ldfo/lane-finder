@@ -13,7 +13,7 @@ The goals / steps of this project are the following:
 
 ### Reflection
 
-### 1. Describe your pipeline.
+### 1. Pipeline description.
 
 The pipeline works as follows:
 1. First convert the image to grayscale
