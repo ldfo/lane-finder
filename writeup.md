@@ -21,27 +21,31 @@ The goals / steps of this project are the following:
 
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### 1. Describe your pipeline.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+The pipeline works as follows:
+1. First convert the image to grayscale
+2. Apply gaussian blur
+3. Apply Canny edge detection
+4. Apply a mask to the image keeping the part we are interested in only
+5. Use Hough transformation to find lines from the detected edges
+6. Draw the lines
+7. Combine the original image with the image of the lines
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+In order to draw a single line on the left and right lanes I calculated the slope of each detected image, then using a threshold on the slope I classified lines into three categories: left lane lines, right lane lines or other lines like horizontal that I discarded.
+Then using numpy's polyfit I adjusted two lines, one for the left lane and one for the right lane and got a line equation $y = m*x$ for each lane. Using this two equations I got the points I needed for drawing the left and right lanes. I draw the lines starting at the bottom of the screen and ending at a fixed height of 1.7 of the image height.
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+### 2. Potential shortcomings
 
-![alt text][image1]
+One potential shortcoming that I detected with my image processing pipeline is that the slope by itself is not always the best way to classify if a line is a right lane line or a left lane line. Many shadows on the challenge video got past this and were classified as left lane lines and caused my line to jump a lot.
 
+Also changes on the surface of the highway were detected as lines and although horizontal lines were filtered by the slope they introduced a lot of noise.
 
-### 2. Identify potential shortcomings with your current pipeline
-
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+The drawn line jumped quite a bit and needed some smoothing.
 
 
-### 3. Suggest possible improvements to your pipeline
+### 3. Possible Improvements
 
-A possible improvement would be to ...
+The lane classification could be improved by using other metrics not only the slope. Also better filtering of the noise lines.
 
-Another potential improvement could be to ...
+Smoothing of the lane line movement. Using info from the past frames implement a smoothing function for the lane line to be more stable.
